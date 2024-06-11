@@ -1,0 +1,43 @@
+<body></body>
+<script type="module">
+  import * as box from '../boxjs.js';
+  
+  let game = new box.Box(30, new box.Vec2(500,500));
+  game._test();
+  
+  //Create a new canvas
+  game.begin();
+  //Create a new box sprite, and add it to the games storage
+  
+  const cwSquare = new box.Sprite("white");
+  cwSquare.setPos(new box.Vec2(100,100)).setSize(new box.Vec2(100,100));
+  game.add_sprite(cwSquare);
+  
+  const ccwSquare = new box.Sprite("yellow");
+  ccwSquare.setPos(new box.Vec2(300,100)).setSize(new box.Vec2(100,100));
+  game.add_sprite(ccwSquare);
+  
+  const scaleSquare = new box.Sprite("green");
+  scaleSquare.setPos(new box.Vec2(350,300)).setSize(new box.Vec2(100,100));
+  game.add_sprite(scaleSquare);
+  
+  const rainbowSquare = new box.Sprite();
+  rainbowSquare.setPos(new box.Vec2(100, 300)).setSize(new box.Vec2(100,100));
+  game.add_sprite(rainbowSquare);
+  
+  
+  //Early Render, as to not leave the player with an empty frame
+  game.render();
+  
+  setInterval(function(){
+    cwSquare.changeRotation(1);
+    ccwSquare.transform.rotation -= 1
+    
+    scaleSquare.setSize(new box.Vec2(Math.sin(game.frame/10)*60,100));
+    
+    rainbowSquare.setColor(box.hslToHex(game.frame,100,50))
+    
+    game.render()
+  }, game.framerate);
+</script>
+<style>body{margin:0;}</style>

@@ -1,0 +1,24 @@
+<body></body>
+<script type="module">
+  console.log("A");
+  import * as box from '../boxjs.js';
+  
+  let game = new box.Box(30, new box.Vec2(500,500), box.VEC2.ZERO, box.FLAGS.KEEP_WIDTH);
+  game._test();
+  
+  //Create a new canvas
+  game.begin();
+  console.log("A");
+  //Create a new box sprite, and add it to the games storage
+  
+  const square = new box.Sprite("white");
+  square.setPos(new box.Vec2(150,150)).setSize(new box.Vec2(200,200));
+  game.add_sprite(square);
+  game.render();
+  setInterval(function(){
+    game.render()
+    square.transform.rotation += 1
+  }, game.framerate);
+  //game.render();
+</script>
+<style>body{margin:0;}</style>
